@@ -24,7 +24,7 @@ extension RealmTool {
         
         var name : String = "common"
         let dbPath = docPath.appending("/\(name).realm")
-        print("realm地址为： \(dbPath)")
+//        print("realm地址为： \(dbPath)")
         return dbPath
     }
 }

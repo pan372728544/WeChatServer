@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "server/ClientManager.swift"
-            timestampString = "580996196.7352901"
+            timestampString = "581233205.878054"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
             landmarkName = "startReadMsg(dicClient:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "server/ServerManager.swift"
-            timestampString = "581215549.66743"
+            timestampString = "581233275.674196"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
-            landmarkName = "sendMsgToClientHandleSingleChat(_:fromeId:toId:chatId:)"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
+            landmarkName = "handleOffMessage(data:key:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -109,15 +109,15 @@ extension ClientManager {
                     let chatMsg = try! ProtoMessage.parseFrom(data: data)
                     // 是否包含这个聊天Id
                     let chatType = chatMsg.recipientId
+                    print("\(chatMsg.senderName) 发送了消息：\(chatMsg.text)")
                     // 单聊
                     if chatType != nil {
                         // 转发消息
                         delegate?.sendMsgToClientHandleSingleChat(totalData, fromeId: chatMsg.senderId, toId: chatMsg.recipientId,chatId: chatMsg.chatId)
                         continue
-
+                        
                     }
-                    
-                    print("")
+                
                 } else if type == 200 {
                     
                     // 登录
