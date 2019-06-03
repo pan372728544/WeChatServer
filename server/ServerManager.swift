@@ -105,7 +105,11 @@ extension ServerManager : ClientManagerDelegate {
                     receiveOnline = true
                 }
                 
-                if (key == fromeId || key == toId) && (chatId == "\(fromeId)_\(toId)" || chatId == "\(toId)_\(fromeId)") {
+                let members = [fromeId, toId]
+                let sorted = members.sorted{$0.localizedCaseInsensitiveCompare($1) == .orderedAscending}
+                let chatIdStr =  Checksum.md5HashOf(string: sorted.joined(separator: ""))
+                
+                if chatId == chatIdStr {
                     
                     // 判断所在的房间 暂未实现
                     let client : TCPClient = self.clientSingleDic[key] as! TCPClient

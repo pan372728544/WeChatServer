@@ -78,23 +78,23 @@ extension ClientManager {
                     // 数据转成聊天数据
                     let chatMsg = try! ProtoUser.parseFrom(data: data)
                     // 更新字典数据
-//                    dicClient.updateValue(tcpClient, forKey: chatMsg.userId)
-//                    print("\(String(describing: chatMsg.name)) 进入回话页面")
-//
-//                    // 进入会话查看是否有离线消息
-//                    delegate?.sendOfflineMsg(data: data, toId: chatMsg.userId)
+                    dicClient.updateValue(tcpClient, forKey: chatMsg.objectId)
+                    print("\(String(describing: chatMsg.name)) 进入回话页面")
+                    
+                    // 进入会话查看是否有离线消息
+                    delegate?.sendOfflineMsg(data: data, toId: chatMsg.objectId)
                 }
                 else if type == 1 {
                     // 离开回话
                     tcpClient.close()
                     delegate?.removeClient(self)
-//                    // 数据转成聊天数据
-//                    let chatMsg = try! ProtoUser.parseFrom(data: data)
-//                    // 更新字典数据
-//                    guard let index = dicClient.index(forKey: chatMsg.userId) else {return}
-//                    dicClient.remove(at: index)
-//                    
-//                    print("\(String(describing: chatMsg.name)) 离开回话页面")
+                    // 数据转成聊天数据
+                    let chatMsg = try! ProtoUser.parseFrom(data: data)
+                    // 更新字典数据
+                    guard let index = dicClient.index(forKey: chatMsg.objectId) else {return}
+                    dicClient.remove(at: index)
+                    
+                    print("\(String(describing: chatMsg.name)) 离开回话页面")
                     
                 } else if type == 100 {
                     // 心跳包
@@ -103,25 +103,24 @@ extension ClientManager {
                 } else if type == 10 {
                     // 获取聊天列表
                     print("获取聊天列表")
-                } else if type == 2{
+                } else if type == 2 {
                     
-//                    // 数据转成聊天数据
-//                    let chatMsg = try! TextMessage.parseFrom(data: data)
-//                    // 是否包含这个聊天Id
-//                    let chatType = chatMsg.chatType
-//                    print("\(chatMsg.text)")
-//                    // 单聊
-//                    if chatType == "1" {
-//
-//
-//
-//
-//                        delegate?.sendMsgToClientHandleSingleChat(totalData, fromeId: chatMsg.user.userId, toId: chatMsg.toUserId,chatId: chatMsg.chatId)
-//                        continue
-//
-//                    }
+                    // 数据转成聊天数据
+                    let chatMsg = try! ProtoMessage.parseFrom(data: data)
+                    // 是否包含这个聊天Id
+                    let chatType = chatMsg.recipientId
+                    // 单聊
+                    if chatType != nil {
+                        // 转发消息
+                        delegate?.sendMsgToClientHandleSingleChat(totalData, fromeId: chatMsg.senderId, toId: chatMsg.recipientId,chatId: chatMsg.chatId)
+                        continue
+
+                    }
+                    
+                    print("")
                 } else if type == 200 {
                     
+                    // 登录
                    let chatMsg = String(data: data, encoding: .utf8)
                     
                     let predicate = "phone = '\(chatMsg!)'"
@@ -142,7 +141,7 @@ extension ClientManager {
                     protoUser.lastTerminate = dbUser.lastTerminate
                     protoUser.createdAt = dbUser.createdAt
                     protoUser.updatedAt = dbUser.updatedAt
-                    
+                    protoUser.gender = dbUser.gender
                     let msgData = (try! protoUser.build()).data()
                     
                     totalData =  toTotalData(data: msgData, type: type)
@@ -150,11 +149,6 @@ extension ClientManager {
                 else if type == 201 {
                     
                     // 获取好友列表
-                    
-                    //  获取请求用户信息
-                    let chatMsg = try! ProtoUser.parseFrom(data: data)
-                    
-                    
                     let friends : Results<DBFriend>  = RealmTool.getFriendList()
                     
                     for item in friends {
@@ -176,11 +170,37 @@ extension ClientManager {
                         delegate?.sendMsgToClient(totalData)
                         
                     }
-                    
-                    
-                    print("")
                     continue
                     
+                }
+                else if type == 202 {
+                    
+                    // 获取好友详细信息
+                    let chatMsg = String(data: data, encoding: .utf8)
+                    
+                    let predicate = "phone = '\(chatMsg!)'"
+                    
+                    let messages : Results<DBUser>  = RealmTool.getUserByPredicate(predicate)
+                    let dbUser : DBUser = messages.first!
+                    
+                    let protoUser = ProtoUser.Builder()
+                    protoUser.objectId = dbUser.objectId
+                    protoUser.phone = dbUser.phone
+                    protoUser.name = dbUser.name
+                    protoUser.nickName = dbUser.nickName
+                    protoUser.country = dbUser.country
+                    protoUser.status = dbUser.status
+                    protoUser.picture = dbUser.picture
+                    protoUser.thumbnail = dbUser.thumbnail
+                    protoUser.lastActive = dbUser.lastActive
+                    protoUser.lastTerminate = dbUser.lastTerminate
+                    protoUser.createdAt = dbUser.createdAt
+                    protoUser.updatedAt = dbUser.updatedAt
+                    protoUser.gender = dbUser.gender
+                    
+                    let msgData = (try! protoUser.build()).data()
+                    
+                    totalData =  toTotalData(data: msgData, type: type)
                 }
                 
                 delegate?.sendMsgToClient(totalData)

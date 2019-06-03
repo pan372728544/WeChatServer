@@ -14,8 +14,9 @@
 		38806394226D54B400A4BEAC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38806392226D54B400A4BEAC /* LaunchScreen.storyboard */; };
 		3880639D226D647D00A4BEAC /* ClientManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3880639B226D647D00A4BEAC /* ClientManager.swift */; };
 		3880639E226D647D00A4BEAC /* ServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3880639C226D647D00A4BEAC /* ServerManager.swift */; };
-		38EDD794228D43E900E9935A /* Immessage.proto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EDD792228D43E900E9935A /* Immessage.proto.swift */; };
-		38EDD795228D43E900E9935A /* IMMessage.proto in Sources */ = {isa = PBXBuildFile; fileRef = 38EDD793228D43E900E9935A /* IMMessage.proto */; };
+		38AA0276229FF8D000755C8D /* IMMessage.proto in Sources */ = {isa = PBXBuildFile; fileRef = 38AA0274229FF8D000755C8D /* IMMessage.proto */; };
+		38AA027D229FFA7A00755C8D /* Immessage.proto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AA027C229FFA7A00755C8D /* Immessage.proto.swift */; };
+		38AA027F22A0D69F00755C8D /* Checksum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AA027E22A0D69E00755C8D /* Checksum.swift */; };
 		38FAF09E2283B23300BCE225 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FAF09C2283B23300BCE225 /* ChatMessage.swift */; };
 		38FAF09F2283B23300BCE225 /* RealmTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FAF09D2283B23300BCE225 /* RealmTool.swift */; };
 		B8C45D95F81E96D52C27BFA7 /* Pods_server.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09D2AE5B17C16D1B1079E497 /* Pods_server.framework */; };
@@ -32,8 +33,9 @@
 		38806395226D54B400A4BEAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3880639B226D647D00A4BEAC /* ClientManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientManager.swift; sourceTree = "<group>"; };
 		3880639C226D647D00A4BEAC /* ServerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerManager.swift; sourceTree = "<group>"; };
-		38EDD792228D43E900E9935A /* Immessage.proto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Immessage.proto.swift; sourceTree = "<group>"; };
-		38EDD793228D43E900E9935A /* IMMessage.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; path = IMMessage.proto; sourceTree = "<group>"; };
+		38AA0274229FF8D000755C8D /* IMMessage.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; name = IMMessage.proto; path = ../../WeChat/WeChat/Realm/IMMessage.proto; sourceTree = "<group>"; };
+		38AA027C229FFA7A00755C8D /* Immessage.proto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Immessage.proto.swift; path = ../../WeChat/WeChat/Realm/Immessage.proto.swift; sourceTree = "<group>"; };
+		38AA027E22A0D69E00755C8D /* Checksum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checksum.swift; sourceTree = "<group>"; };
 		38FAF09C2283B23300BCE225 /* ChatMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
 		38FAF09D2283B23300BCE225 /* RealmTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmTool.swift; sourceTree = "<group>"; };
 		F1A4EE434EA8274164E644D0 /* Pods-server.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-server.debug.xcconfig"; path = "Pods/Target Support Files/Pods-server/Pods-server.debug.xcconfig"; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				3880638B226D54B100A4BEAC /* ViewController.swift */,
 				3880639B226D647D00A4BEAC /* ClientManager.swift */,
 				3880639C226D647D00A4BEAC /* ServerManager.swift */,
+				38AA027E22A0D69E00755C8D /* Checksum.swift */,
 				3880638D226D54B100A4BEAC /* Main.storyboard */,
 				38806390226D54B400A4BEAC /* Assets.xcassets */,
 				38806392226D54B400A4BEAC /* LaunchScreen.storyboard */,
@@ -97,10 +100,10 @@
 		38FAF09B2283B23300BCE225 /* RealmSwift */ = {
 			isa = PBXGroup;
 			children = (
-				38EDD792228D43E900E9935A /* Immessage.proto.swift */,
-				38EDD793228D43E900E9935A /* IMMessage.proto */,
 				38FAF09C2283B23300BCE225 /* ChatMessage.swift */,
 				38FAF09D2283B23300BCE225 /* RealmTool.swift */,
+				38AA027C229FFA7A00755C8D /* Immessage.proto.swift */,
+				38AA0274229FF8D000755C8D /* IMMessage.proto */,
 			);
 			path = RealmSwift;
 			sourceTree = "<group>";
@@ -244,10 +247,11 @@
 				38FAF09F2283B23300BCE225 /* RealmTool.swift in Sources */,
 				3880639E226D647D00A4BEAC /* ServerManager.swift in Sources */,
 				3880638C226D54B100A4BEAC /* ViewController.swift in Sources */,
-				38EDD795228D43E900E9935A /* IMMessage.proto in Sources */,
-				38EDD794228D43E900E9935A /* Immessage.proto.swift in Sources */,
 				3880638A226D54B100A4BEAC /* AppDelegate.swift in Sources */,
+				38AA0276229FF8D000755C8D /* IMMessage.proto in Sources */,
 				3880639D226D647D00A4BEAC /* ClientManager.swift in Sources */,
+				38AA027F22A0D69F00755C8D /* Checksum.swift in Sources */,
+				38AA027D229FFA7A00755C8D /* Immessage.proto.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
