@@ -72,7 +72,8 @@ extension ClientManager {
                 // 完整数据 转发给客户端
                 var totalData = headData + typeData + data
                 
-//                print("类型为：\(type)")
+
+                print("类型\(type)  -- 心跳(100) 进入(0) 离开(1) 消息(2) ")
                 // 进入会话
                 if type == 0 {
                     // 数据转成聊天数据
@@ -95,6 +96,7 @@ extension ClientManager {
                     dicClient.remove(at: index)
                     
                     print("\(String(describing: chatMsg.name)) 离开回话页面")
+                    continue
                     
                 } else if type == 100 {
                     // 心跳包
@@ -151,6 +153,9 @@ extension ClientManager {
                     // 获取好友列表
                     let friends : Results<DBFriend>  = RealmTool.getFriendList()
                     
+                    var array : [Any] = [Any]()
+                    
+                    
                     for item in friends {
                         let dbFriend = item
                         
@@ -166,10 +171,17 @@ extension ClientManager {
                         protoFriend.picture = dbFriend.picture
                         let msgData = (try! protoFriend.build()).data()
                         
-                        totalData =  toTotalData(data: msgData, type: type)
-                        delegate?.sendMsgToClient(totalData)
+                        
+                        array.append(msgData)
+                        
+//                        totalData =  toTotalData(data: msgData, type: type)
+//                        delegate?.sendMsgToClient(totalData)
                         
                     }
+                    let msgData = NSKeyedArchiver.archivedData(withRootObject: array)
+                    
+                    totalData =  toTotalData(data: msgData, type: type)
+                    delegate?.sendMsgToClient(totalData)
                     continue
                     
                 }
@@ -221,7 +233,7 @@ extension ClientManager {
     private func removeClient() {
         delegate?.removeClient(self)
         isClientConnected = false
-        print("客户端断开了连接")
+        print("客户端断开了连接  \(tcpClient.address)")
         tcpClient.close()
     }
     

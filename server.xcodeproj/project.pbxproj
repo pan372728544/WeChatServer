@@ -24,6 +24,7 @@
 
 /* Begin PBXFileReference section */
 		09D2AE5B17C16D1B1079E497 /* Pods_server.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_server.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3836BD9822A63A990015B733 /* common.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = common.realm; sourceTree = "<group>"; };
 		38806386226D54B100A4BEAC /* server.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = server.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		38806389226D54B100A4BEAC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3880638B226D54B100A4BEAC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -100,6 +101,7 @@
 		38FAF09B2283B23300BCE225 /* RealmSwift */ = {
 			isa = PBXGroup;
 			children = (
+				3836BD9822A63A990015B733 /* common.realm */,
 				38FAF09C2283B23300BCE225 /* ChatMessage.swift */,
 				38FAF09D2283B23300BCE225 /* RealmTool.swift */,
 				38AA027C229FFA7A00755C8D /* Immessage.proto.swift */,
